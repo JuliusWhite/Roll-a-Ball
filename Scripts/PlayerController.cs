@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
 
     private float movementX;
     private float movementY;
+    private float movementZ;
+    
+    private int coinCount;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +51,15 @@ public class PlayerController : MonoBehaviour
         
         dir *= Time.deltaTime;
         transform.Translate(dir * speed);
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            coinCount++;
+            other.gameObject.SetActive(false);
+        }
     }
 
 }
